@@ -31,12 +31,6 @@ jobs:
         working-directory: ./blog-backend
         run: npm install
 
-      # Frontend
-      - name: Install dependencies Frontend
-        working-directory: ./blog-frontend
-        run: npm install
-        
-      # Backend
       - name: Run Backend
         working-directory: ./blog-backend
         run: npm start
@@ -46,6 +40,10 @@ jobs:
         run: npm run build
 
       # Frontend
+      - name: Install dependencies Frontend
+        working-directory: ./blog-frontend
+        run: npm install
+        
       - name: Run Frontend
         working-directory: ./blog-frontend
         run: npm start
