@@ -2,9 +2,10 @@
   "name": "blog",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\" \"npm run start:testes\"",
     "start:frontend": "cd blog-frontend && npm start",
-    "start:backend": "cd blog-backend && npm start"
+    "start:backend": "cd blog-backend && npm start",
+    "start:testes": "cd blog-frontend && npm cypress run"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
