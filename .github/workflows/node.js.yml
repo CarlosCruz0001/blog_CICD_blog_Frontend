@@ -1,4 +1,4 @@
-name: CI/CD Blog
+name: CI/CD Blog (frontend)
 
 on:
   push:
@@ -13,36 +13,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use a versão do Node.js que você está usando
 
-    - name: Install dependencies
-      run: npm install
+      # Frontend
+      - name: Install dependencies for frontend
+        working-directory: ./blog-frontend
+        run: npm install
 
-    - name: Run frontend tests
-      run: |
-        cd blog-frontend
-        npm install
-        npm run test -- --watchAll=false
+      - name: Run frontend tests
+        working-directory: ./blog-frontend
+        run: npm test -- --watchAll=false
 
-    - name: Run backend tests
-      run: |
-        cd blog-api
-        npm install
-        npm run typeorm
-        npm run test
+      - name: Build frontend
+        working-directory: ./blog-frontend
+        run: npm run build
 
-    - name: Build frontend
-      run: |
-        cd blog-frontend
-        npm run build
+      - name: Deploy frontend to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm install -g vercel
+          vercel --prod --token $VERCEL_TOKEN
 
-    - name: Build backend
-      run: |
-        cd blog-api
-        npm run build
+      # Backend
+      - name: Install dependencies for backend
+        working-directory: ./blog-api
+        run: npm install
+
+
+      - name: Build backend
+        working-directory: ./blog-api
+        run: npm run build # Certifique-se de que há um script de build se necessário
+
+      - name: Deploy backend (Example for Heroku)
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          git remote add heroku https://git.heroku.com/your-app.git
+          git push heroku main
