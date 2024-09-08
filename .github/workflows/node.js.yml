@@ -1,4 +1,4 @@
-name: CI/CD Blog (frontend)
+name: CI/CD Pipeline
 
 on:
   push:
@@ -20,19 +20,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18' # Use a versão do Node.js que você está usando
-     
-     # APP
-      - name: Install dependencies for projetct
-        working-directory: ./
-        run: npm install
 
-      - name: Build Project
-        working-directory: ./
-        run: npm start
+      # Frontend
+      - name: Install dependencies for frontend
+        working-directory: ./blog-frontend
+        run: npm install
 
       - name: Run frontend tests
         working-directory: ./blog-frontend
-        run: npx cypress run
+        run: npm test -- --watchAll=false
+
+      - name: Build frontend
+        working-directory: ./blog-frontend
+        run: npm run build
 
       - name: Deploy frontend to Vercel
         env:
@@ -41,7 +41,19 @@ jobs:
           npm install -g vercel
           vercel --prod --token $VERCEL_TOKEN
 
-     
+      # Backend
+      - name: Install dependencies for backend
+        working-directory: ./blog-api
+        run: npm install
+
+      - name: Run backend tests
+        working-directory: ./blog-api
+        run: npm test
+
+      - name: Build backend
+        working-directory: ./blog-api
+        run: npm run build # Certifique-se de que há um script de build se necessário
+
       - name: Deploy backend (Example for Heroku)
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
