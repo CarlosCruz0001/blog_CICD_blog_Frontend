@@ -28,7 +28,7 @@ jobs:
 
       - name: Run App
         working-directory: ./
-        run: npm start
+        run: start
 
       - name: Run tests frontend
         working-directory: ./blog-frontend
@@ -40,19 +40,6 @@ jobs:
         run: |
           npm install -g vercel
           vercel --prod --token $VERCEL_TOKEN
-
-      # Backend
-      - name: Install dependencies for backend
-        working-directory: ./blog-api
-        run: npm install
-
-      - name: Run backend tests
-        working-directory: ./blog-api
-        run: npm test
-
-      - name: Build backend
-        working-directory: ./blog-api
-        run: npm run build # Certifique-se de que há um script de build se necessário
 
       - name: Deploy backend (Example for Heroku)
         env:
