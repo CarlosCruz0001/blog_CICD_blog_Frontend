@@ -36,16 +36,20 @@ jobs:
         working-directory: ./blog-frontend
         run: npm install
         
-      # App
-      - name: Run App
-        working-directory: ./
+      # Backend
+      - name: Run Backend
+        working-directory: ./blog-backend
         run: npm start
-
+        
+      # Frontend
+      - name: Run Frontend
+        working-directory: ./blog-frontend
+        run: npm start
+        
       - name: Run tests frontend
         working-directory: ./blog-frontend
         run: npx cypress run
       
-
       - name: Deploy frontend to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
