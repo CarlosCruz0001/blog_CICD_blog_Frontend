@@ -20,6 +20,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18' # Use a versão do Node.js que você está usando
+     # Backend
+      - name: Install dependencies for backend
+        working-directory: ./blog-api
+        run: npm install
+
+
+      - name: Build backend
+        working-directory: ./blog-api
+        run: npm run build # Certifique-se de que há um script de build se necessário
 
       # Frontend
       - name: Install dependencies for frontend
@@ -41,16 +50,7 @@ jobs:
           npm install -g vercel
           vercel --prod --token $VERCEL_TOKEN
 
-      # Backend
-      - name: Install dependencies for backend
-        working-directory: ./blog-api
-        run: npm install
-
-
-      - name: Build backend
-        working-directory: ./blog-api
-        run: npm run build # Certifique-se de que há um script de build se necessário
-
+     
       - name: Deploy backend (Example for Heroku)
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
