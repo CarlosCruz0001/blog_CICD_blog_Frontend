@@ -21,18 +21,18 @@ jobs:
         with:
           node-version: '18' # Use a versão do Node.js que você está usando
 
-      # Frontend
-      - name: Install dependencies for frontend
-        working-directory: ./blog-frontend
+      # App
+      - name: Install dependencies project
+        working-directory: ./
         run: npm install
 
-      - name: Run frontend tests
-        working-directory: ./blog-frontend
-        run: npm test -- --watchAll=false
+      - name: Run App
+        working-directory: ./
+        run: npm start
 
-      - name: Build frontend
+      - name: Run tests frontend
         working-directory: ./blog-frontend
-        run: npm run build
+        run: npx cypress run
 
       - name: Deploy frontend to Vercel
         env:
