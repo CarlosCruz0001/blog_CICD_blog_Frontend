@@ -21,23 +21,18 @@ jobs:
         with:
           node-version: '18' # Use a versão do Node.js que você está usando
      
-     # Backend
+     # APP
       - name: Install dependencies for projetct
-        working-directory: ./blog-backend
+        working-directory: ./blog
         run: npm install
 
-      # Frontend
-      - name: Install dependencies for frontend
-        working-directory: ./blog-frontend
-        run: npm install
+      - name: Build Project
+        working-directory: ./blog
+        run: npm start
 
       - name: Run frontend tests
         working-directory: ./blog-frontend
         run: npx cypress run
-
-      - name: Build frontend
-        working-directory: ./blog-frontend
-        run: npm run build
 
       - name: Deploy frontend to Vercel
         env:
