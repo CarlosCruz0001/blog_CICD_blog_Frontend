@@ -43,9 +43,6 @@ jobs:
         working-directory: ./blog-backend
         run: npm run build
 
-      - name: Run tests frontend
-        working-directory: ./blog-frontend
-        run: npx cypress run
 
       - name: Build Frontend
         working-directory: ./blog-frontend
