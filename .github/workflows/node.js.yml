@@ -40,11 +40,20 @@ jobs:
       - name: Run Backend
         working-directory: ./blog-backend
         run: npm start
-        
+
+      - name: Build Backend
+        working-directory: ./blog-backend
+        run: npm run build
+
       # Frontend
       - name: Run Frontend
         working-directory: ./blog-frontend
         run: npm start
+
+      - name: Build Frontend
+        working-directory: ./blog-frontend
+        run: npm run build
+
         
       - name: Run tests frontend
         working-directory: ./blog-frontend
