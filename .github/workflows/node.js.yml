@@ -23,11 +23,11 @@ jobs:
      
      # APP
       - name: Install dependencies for projetct
-        working-directory: ./blog
+        working-directory: ./
         run: npm install
 
       - name: Build Project
-        working-directory: ./blog
+        working-directory: ./
         run: npm start
 
       - name: Run frontend tests
