@@ -35,15 +35,16 @@ jobs:
       - name: Install dependencies Frontend
         working-directory: ./blog-frontend
         run: npm install
+        
+      # App
+      - name: Run App
+        working-directory: ./
+        run: npm start
 
       - name: Run tests frontend
         working-directory: ./blog-frontend
         run: npx cypress run
       
-      # App
-      - name: Run App
-        working-directory: ./
-        run: npm start
 
       - name: Deploy frontend to Vercel
         env:
