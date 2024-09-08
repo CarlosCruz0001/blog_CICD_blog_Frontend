@@ -31,31 +31,25 @@ jobs:
         working-directory: ./blog-backend
         run: npm install
 
-      - name: Run Backend
-        working-directory: ./blog-backend
+      # Frontend
+      - name: Install dependencies Frontend
+        working-directory: ./blog-frontend
+        run: npm install
+
+      - name: Run APP
         run: npm start
 
       - name: Build Backend
         working-directory: ./blog-backend
         run: npm run build
 
-      # Frontend
-      - name: Install dependencies Frontend
+      - name: Run tests frontend
         working-directory: ./blog-frontend
-        run: npm install
-        
-      - name: Run Frontend
-        working-directory: ./blog-frontend
-        run: npm start
+        run: npx cypress run
 
       - name: Build Frontend
         working-directory: ./blog-frontend
         run: npm run build
-
-        
-      - name: Run tests frontend
-        working-directory: ./blog-frontend
-        run: npx cypress run
       
       - name: Deploy frontend to Vercel
         env:
