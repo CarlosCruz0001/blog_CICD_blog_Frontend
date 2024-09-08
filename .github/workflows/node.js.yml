@@ -33,7 +33,7 @@ jobs:
 
       - name: Run frontend tests
         working-directory: ./blog-frontend
-        run: npm test -- --watchAll=false
+        run: npx cypress run
 
       - name: Build frontend
         working-directory: ./blog-frontend
