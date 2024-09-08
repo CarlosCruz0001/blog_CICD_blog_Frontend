@@ -25,10 +25,21 @@ jobs:
       - name: Install dependencies project
         working-directory: ./
         run: npm install
+      
+      # Backend
+      - name: Install dependencies Backend
+        working-directory: ./blog-backend
+        run: npm install
 
+      # Frontend
+      - name: Install dependencies Frontend
+        working-directory: ./blog-frontend
+        run: npm install
+
+      # App
       - name: Run App
         working-directory: ./
-        run: start
+        run: npm start
 
       - name: Run tests frontend
         working-directory: ./blog-frontend
