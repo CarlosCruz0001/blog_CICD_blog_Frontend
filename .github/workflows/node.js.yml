@@ -36,6 +36,10 @@ jobs:
         working-directory: ./blog-frontend
         run: npm install
 
+      - name: Install cypress
+        working-directory: ./blog-frontend
+        run: npm install-cypress     
+
       - name: Run APP
         run: npm start
 
